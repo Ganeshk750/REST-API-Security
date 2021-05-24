@@ -1,4 +1,4 @@
 # REST-API-Security
 ```
- ### Basic Authentication - In-memory --(master branch)
+ 1. Basic Authentication - In-memory --(master branch)
 ```
