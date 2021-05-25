@@ -1,6 +1,7 @@
 package com.ganesh.api.model;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,9 @@ public class User implements UserDetails{
 	private String username;
 	private String password;
 	private boolean enabled;
+	
+	
+	private Set<GrantedAuthority> authorities;
 	
 	public User() {
 	}
@@ -49,11 +53,15 @@ public class User implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	public void setAuthorities(Set<GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return authorities;
 	}
 
 	@Override

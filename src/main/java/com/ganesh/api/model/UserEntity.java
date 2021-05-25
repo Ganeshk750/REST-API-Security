@@ -1,8 +1,13 @@
 package com.ganesh.api.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +30,9 @@ public class UserEntity {
 
     @Column(name = "Enabled")
     private boolean enabled;
+    
+    @OneToMany(mappedBy="userEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<AuthoritiesEntity> authoritiesEntities;
 
     public UserEntity() {
     }
@@ -58,5 +66,15 @@ public class UserEntity {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+	public Set<AuthoritiesEntity> getAuthoritiesEntities() {
+		return authoritiesEntities;
+	}
+
+	public void setAuthoritiesEntities(Set<AuthoritiesEntity> authoritiesEntities) {
+		this.authoritiesEntities = authoritiesEntities;
+	}
+    
+    
 }
 
