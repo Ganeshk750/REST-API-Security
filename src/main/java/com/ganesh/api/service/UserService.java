@@ -1,11 +1,10 @@
 package com.ganesh.api.service;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ganesh.api.model.User;
+import com.ganesh.api.model.UserEntity;
+import com.ganesh.api.repository.UserRepository;
 
 /**
  * @Ptoject: books-ws
@@ -16,28 +15,25 @@ import com.ganesh.api.model.User;
 @Service
 public class UserService {
 	
-	// private User user = null;
-	
-	@Autowired
-	private JsonUserDb jsonUser;
-	
-	public UserService() {
-		//user = new User("myusername", "$2y$12$iINQIR49Zw8C8lQDDngcvu8JvjPBvF/WQlpjTbNsWGCjQrausGMo2", true);
-	}
-	
-	public User getUserByUsername(String username) {
-//		if(user.getUserName().equals(userName)) {
-//			return user;
-//		}else {
-//			return null;
-//		}
-		Optional<User> optionalUser = jsonUser.findByUsername(username);
-		if(optionalUser.isPresent()) {
-			return optionalUser.get();
-		}else {
-			return null;
-		}
-		
-	}
+	private UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public User getUserByUsername(String username) {
+
+        UserEntity userEntity = userRepository.findByUsername(username);
+        if(userEntity != null) {
+            return createUserFromUserEntity(userEntity);
+        } else {
+            return null;
+        }
+    }
+
+    private User createUserFromUserEntity(UserEntity ue) {
+
+        return new User(ue.getUsername(), ue.getPassword(), ue.isEnabled());
+    }
 
 }
