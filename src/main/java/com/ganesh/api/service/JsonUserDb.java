@@ -14,7 +14,7 @@ import com.ganesh.api.model.User;
 
 
 @Service
-public class UserRepository {
+public class JsonUserDb {
 	
 	private static List<User> users;
 	
@@ -30,9 +30,9 @@ public class UserRepository {
 		}
 	}
 	
-	public Optional<User> findByUsername(String userName) {
-		return users.stream().filter(user -> user.getUserName()
-				                       .equals(userName)).findFirst();
+	public Optional<User> findByUsername(String username) {
+		return users.stream().filter(user -> user.getUsername()
+				                       .equals(username)).findFirst();
 	}
 
 	

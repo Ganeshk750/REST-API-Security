@@ -12,26 +12,26 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class User implements UserDetails{
 	
-	private String userName;
+	private String username;
 	private String password;
 	private boolean enabled;
 	
 	public User() {
 	}
 
-	public User(String userName, String password, boolean enabled) {
+	public User(String username, String password, boolean enabled) {
 		super();
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -52,12 +52,6 @@ public class User implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getUsername() {
 		// TODO Auto-generated method stub
 		return null;
 	}

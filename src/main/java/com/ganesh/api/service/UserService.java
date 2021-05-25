@@ -19,19 +19,19 @@ public class UserService {
 	// private User user = null;
 	
 	@Autowired
-	private UserRepository userRepo;
+	private JsonUserDb jsonUser;
 	
 	public UserService() {
 		//user = new User("myusername", "$2y$12$iINQIR49Zw8C8lQDDngcvu8JvjPBvF/WQlpjTbNsWGCjQrausGMo2", true);
 	}
 	
-	public User getUserByUserName(String userName) {
+	public User getUserByUsername(String username) {
 //		if(user.getUserName().equals(userName)) {
 //			return user;
 //		}else {
 //			return null;
 //		}
-		Optional<User> optionalUser = userRepo.findByUsername(userName);
+		Optional<User> optionalUser = jsonUser.findByUsername(username);
 		if(optionalUser.isPresent()) {
 			return optionalUser.get();
 		}else {
