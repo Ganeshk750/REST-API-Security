@@ -26,16 +26,21 @@ public class AuthoritiesEntity {
     @Column(name = "Authority")
     private String authority;
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "Username", nullable = false)
-    private UserEntity userEntity;
+    @Column(name = "Role")
+    private String role;
+    
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "Username", nullable = false)
+//    private UserEntity userEntity;
     
     public AuthoritiesEntity() {}
 
-	public AuthoritiesEntity(Integer authorityId, String authority) {
+	
+	public AuthoritiesEntity(Integer authorityId, String authority, String role) {
 		super();
 		this.authorityId = authorityId;
 		this.authority = authority;
+		this.role = role;
 	}
 
 	public Integer getAuthorityId() {
@@ -54,12 +59,12 @@ public class AuthoritiesEntity {
 		this.authority = authority;
 	}
 
-	public UserEntity getUserEntity() {
-		return userEntity;
+	public String getRole() {
+		return role;
 	}
 
-	public void setUserEntity(UserEntity userEntity) {
-		this.userEntity = userEntity;
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

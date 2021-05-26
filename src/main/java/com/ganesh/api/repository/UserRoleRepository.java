@@ -1,21 +1,20 @@
 package com.ganesh.api.repository;
 
-import java.util.Set;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.ganesh.api.model.AuthoritiesEntity;
 import com.ganesh.api.model.UserEntity;
+import com.ganesh.api.model.UserRoleEntity;
 
 /**
  * @Ptoject: books-ws
  * @Author: Ganesh
- * @Date: May 25, 2021
+ * @Date: May 26, 2021
  */
 
 @Repository
-public interface AuthoritiesRepository extends CrudRepository<AuthoritiesEntity, String> {
+public interface UserRoleRepository extends CrudRepository<UserRoleEntity, Integer> {
 
-    Set<AuthoritiesEntity> findByRole(String role);
+	UserEntity findByUserEntity(UserEntity userEntity);
 }
