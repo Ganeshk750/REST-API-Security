@@ -23,7 +23,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserDetailsServiceImpl userDetailsService;
 
-    private static String jwtSecret = System.getenv("jwtSecret");
+    //private static String jwtSecret = System.getenv("jwtSecret");
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsService) {
         super(authenticationManager);
@@ -56,7 +56,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(String authHeader) {
 
         if(authHeader != null) {
-            String userNameFromJwt = JWT.require(Algorithm.HMAC512(jwtSecret))
+            String userNameFromJwt = JWT.require(Algorithm.HMAC512("skjdsa345732958!@@##".getBytes()))
                                         .build()
                                         .verify(authHeader.replace("Bearer ", ""))
                                         .getSubject();

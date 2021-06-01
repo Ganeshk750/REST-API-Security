@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private AuthenticationManager authenticationManager;
 
-    private static String jwtSecret = System.getenv("jwtSecret");
+   // private static String jwtSecret = System.getenv("jwtSecret");
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -66,13 +66,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 1800000))
-                //.sign(HMAC512("skjdsa345732958!@@##".getBytes()));
-                .sign(HMAC512(jwtSecret));
+                .sign(HMAC512("skjdsa345732958!@@##".getBytes()));
+              //  .sign(HMAC512(jwtSecret));
           response.addHeader("Authorization", "Bearer " + token);
          
          /* Token as a response*/
-        // response.getWriter().write(token);
-        // response.getWriter().flush();
+         response.getWriter().write(token);
+         response.getWriter().flush();
 
     }
 }
