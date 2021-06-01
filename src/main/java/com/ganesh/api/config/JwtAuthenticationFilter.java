@@ -1,13 +1,8 @@
 package com.ganesh.api.config;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.auth0.jwt.JWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ganesh.api.model.User;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,19 +12,25 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.auth0.jwt.JWT;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ganesh.api.model.User;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
-	
-	@Value("${bookws.security.jwt.token.secret}")
-    private String secret;
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+	/*
+	 * @Value("${security.jwt.token.secret}") private String secret;
+	 */
 
     private AuthenticationManager authenticationManager;
 
-  //  private static String jwtSecret = System.getenv("jwtSecret");
+    private static String jwtSecret = System.getenv("jwtSecret");
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -65,11 +66,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 1800000))
-                .sign(HMAC512(secret.getBytes()));
-                //.sign(HMAC512(jwtSecret));
-
-        response.addHeader("Authorization", "Bearer " + token);
+                //.sign(HMAC512("skjdsa345732958!@@##".getBytes()));
+                .sign(HMAC512(jwtSecret));
+          response.addHeader("Authorization", "Bearer " + token);
+         
+         /* Token as a response*/
+        // response.getWriter().write(token);
+        // response.getWriter().flush();
 
     }
-
 }

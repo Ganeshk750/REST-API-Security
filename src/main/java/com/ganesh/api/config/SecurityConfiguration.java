@@ -47,6 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			 //.httpBasic().authenticationEntryPoint(bookWsAuthenticationEntryPoint);
              .and()
              .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+             .addFilter(new JwtAuthorizationFilter(authenticationManager(), userDetailsService))
              .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 	}
