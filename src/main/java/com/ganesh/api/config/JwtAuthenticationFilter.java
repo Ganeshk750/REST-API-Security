@@ -71,8 +71,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
           response.addHeader("Authorization", "Bearer " + token);
          
          /* Token as a response*/
-         response.getWriter().write(token);
-         response.getWriter().flush();
+         //response.getWriter().write(token);
+         //response.getWriter().flush();
 
     }
 }
